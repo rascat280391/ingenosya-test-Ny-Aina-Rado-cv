@@ -1,1 +1,103 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+@use "assets/fonts/fonts";
+// Plus imports for other components in your app.
+$indigo-palette: (
+  400: #1e88e5,
+  // ... continues to 900
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    // ... continues to 900
+  )
+);
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$cv-project-primary: mat.define-palette(mat.$indigo-palette, 400);
+$cv-project-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$cv-project-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$cv-project-theme: mat.define-light-theme((
+  color: (
+    primary: $cv-project-primary,
+    accent: $cv-project-accent,
+    warn: $cv-project-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($cv-project-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f7f7f7; }
+
+
+.mat-form-field {
+  width: 100%;
+  textarea.mat-input-element {
+    height: 150px;
+  }
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 100px;
+  z-index: 10;
+  position: relative;
+
+}
+.btn-container {
+  .mat-raised-button {
+    background: #1e88e5 !important;
+    border-radius: 40px !important;
+    min-width: 290px !important;
+    color: #fff !important;
+    transition: all 0.5s ease !important;
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%) !important;
+    margin: 20px 10px;
+  }
+}
+
+h1 {
+  font-size: 3.75rem !important;
+  font-family: 'Recoleta DEMO', sans-serif !important;
+  text-align: center;
+  margin-bottom: 40px !important;
+  line-height: normal !important;
+  color: #ffffff;
+}
+
+
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  background-color: transparent;
+}
+.mat-card {
+  box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%) !important;
+}
+.mat-step-header {
+  flex-direction: column;
+  height: 66px !important;
+  .mat-step-icon {
+
+  }
+  .mat-stepper-horizontal-line {}
+}

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CandidatService } from '../candidat.service';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
-import { Experience, Formation } from '../candidat';
+import { Experience, Formation, Skill } from '../candidat';
 import { DateTime } from '../date-time';
 
 @Component({
@@ -19,7 +19,7 @@ export class DiversComponent implements OnInit {
   expGroup: FormGroup;
   formGroup: FormGroup;
 
-  skills: string[];
+  skills: Skill[];
   hobbies: string[];
   exps: Experience[];
   forms: Formation[];
@@ -38,6 +38,7 @@ export class DiversComponent implements OnInit {
 
     this.skillGroup = this._formBuilder.group({
       skill: '',
+      skillStep: '',
       skillList: ['', Validators.required]
     });
 
@@ -64,16 +65,17 @@ export class DiversComponent implements OnInit {
 
     // redirect
     if( !this.candidatService.state.isCreated ) {
-      // this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
     console.log(' candidat ', this.candidatService.state );
   }
 
   addSkill () {
     if( this.skillGroup.value.skill ) {
-      this.skills.push(this.skillGroup.value.skill);
+      this.skills.push({name: this.skillGroup.value.skill, value: this.skillGroup.value.skillStep});
       this.skillGroup.patchValue({
         skill: '',
+        skillStep: 0,
         skillList: this.skills.join(',')
       });
     }
@@ -157,6 +159,6 @@ export class DiversComponent implements OnInit {
       formations: this.forms
     });
     console.log('candidat ', this.candidatService.state)
-    this.router.navigate(['/recap']);
+    this.router.navigate(['/email']);
   }
 }

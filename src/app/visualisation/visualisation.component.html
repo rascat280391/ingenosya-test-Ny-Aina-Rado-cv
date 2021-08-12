@@ -1,6 +1,6 @@
 <div class="resume-wrapper">
 	<p>{{ 'dv-resume-confirme' | translate }}</p>
-	<mat-card style="margin-bottom: 10px;">
+	<!-- <mat-card style="margin-bottom: 10px;">
 	  <mat-card-header>
 	    {{ 'hp-title-info' | translate }}
 	  </mat-card-header>
@@ -19,35 +19,35 @@
 	  <p>{{ candidatService.state.about }}</p>
 	</mat-card>
 
-	<mat-card *ngIf="candidatService.state.skills.length" style="margin-bottom: 10px;">
+	<mat-card *ngIf="skills?.length" style="margin-bottom: 10px;">
 	  <mat-card-header>
 	    {{ 'dv-skill' | translate }}
 	  </mat-card-header>
 	  <mat-card-content>
 	    <ul>
-	      <li *ngFor="let skill of candidatService.state.skills; index as i">{{ skill }}
+	      <li *ngFor="let skill of skills; index as i">{{ skill }}
 	      </li>
 	    </ul>
 	  </mat-card-content>
 	</mat-card>
 
-	<mat-card *ngIf="candidatService.state.hobbies.length" style="margin-bottom: 10px;">
+	<mat-card *ngIf="hobbies?.length" style="margin-bottom: 10px;">
 	  <mat-card-header>
 	    {{ 'dv-hobby' | translate }}
 	  </mat-card-header>
 	  <mat-card-content>
 	    <ul>
-	      <li *ngFor="let hobby of candidatService.state.hobbies; index as i">{{ hobby }} </li>
+	      <li *ngFor="let hobby of hobbies; index as i">{{ hobby }} </li>
 	    </ul>
 	  </mat-card-content>
 	</mat-card>
 
-  <mat-card *ngIf="candidatService.state.experiences.length" style="margin-bottom: 10px;">
+  <mat-card *ngIf="experiences?.length" style="margin-bottom: 10px;">
 	  <mat-card-header>
 	    {{ 'dv-experience' | translate }}
 	  </mat-card-header>
 	  <mat-card-content>
-	    <mat-card *ngFor="let exp of candidatService.state.experiences; index as i" style="margin-bottom: 10px">
+	    <mat-card *ngFor="let exp of experiences; index as i" style="margin-bottom: 10px">
 		    <mat-card-content>
 		      <h1>{{ exp.nomEntreprise }}</h1>
 		      <p>{{ exp.nomPoste }} - {{ dateFormat(exp.dateDebut) }} - {{ dateFormat(exp.dateFin) }}</p>
@@ -57,27 +57,25 @@
 	  </mat-card-content>
 	</mat-card>
 
-	<mat-card *ngIf="candidatService.state.formations.length" style="margin-bottom: 10px;">
+	<mat-card *ngIf="formations?.length" style="margin-bottom: 10px;">
 	  <mat-card-header>
 	    {{ 'dv-formation' | translate }}
 	  </mat-card-header>
 	  <mat-card-content>
-	    <mat-card *ngFor="let form of candidatService.state.formations; index as i" style="margin-bottom: 10px">
+	    <mat-card *ngFor="let form of formations; index as i" style="margin-bottom: 10px">
 	      <mat-card-content>
 	        <h1>{{ form.nomInstitut }}</h1>
 	        <p>{{ form.document }} - {{ dateFormat(form.date) }}</p>
 	      </mat-card-content>
 	    </mat-card>
 	  </mat-card-content>
-	</mat-card>
-
+	</mat-card> -->
 
   <div class="resume-container">
     <div class="resume-left">
       <div class="profile-container">
         <img class="profile" src="assets/images/profile.png" alt="">
         <h1 class="name">{{ candidatService.state.name }}</h1>
-<!--        <h3 class="tagline">Full Stack Developer</h3>-->
       </div>
       <div class="contact-container container-block">
         <ul class="list-unstyled contact-list">
@@ -99,52 +97,48 @@
         <h2 class="container-block-title">A propos</h2>
         <p>{{ candidatService.state.about }}</p>
       </div>
-      <div class="container-block" *ngIf="candidatService.state.hobbies.length">
+      <div class="container-block" *ngIf="hobbies?.length">
         <h2 class="container-block-title">Divertissement</h2>
         <ul class="list-unstyled interests-list">
-          <li *ngFor="let hobby of candidatService.state.hobbies; index as i">{{ hobby }} </li>
+          <li *ngFor="let hobby of hobbies; index as i">{{ hobby }} </li>
         </ul>
       </div>
     </div>
     <div class="resume-right">
-      <div class="title" *ngIf="candidatService.state.experiences.length">
+      <div class="title" *ngIf="experiences.length">
         <div class="top-title">
           <mat-icon>work</mat-icon>
           <h2>EXPERIENCE</h2>
         </div>
-        <div class="item" *ngFor="let exp of candidatService.state.experiences; index as i">
+        <div class="item" *ngFor="let exp of experiences; index as i">
           <h3>{{ exp.nomPoste }} @ {{ exp.nomEntreprise }} <span>{{ dateFormat(exp.dateDebut) }} - {{ dateFormat(exp.dateFin) }}</span> </h3>
           <p>{{ exp.descPoste }}</p>
         </div>
       </div>
-      <div class="title" *ngIf="candidatService.state.formations.length">
+      <div class="title" *ngIf="formations.length">
         <div class="top-title">
           <mat-icon>school</mat-icon>
-          <h2>EDUCATION</h2>
+          <h2>Formation</h2>
         </div>
-        <div class="item" *ngFor="let form of candidatService.state.formations; index as i">
+        <div class="item" *ngFor="let form of formations; index as i">
           <h3>{{ form.document }} <span>{{ dateFormat(form.date) }}</span></h3>
           <div class="school">{{ form.nomInstitut }}</div>
         </div>
       </div>
       <div class="title">
-        <div class="top-title" *ngIf="candidatService.state.skills.length">
+        <div class="top-title" *ngIf="skills?.length">
           <mat-icon>code</mat-icon>
           <h2>SKILL</h2>
         </div>
         <div class="skillset">
-          <div class="item" *ngFor="let skill of candidatService.state.skills; index as i">
-            <h3 class="level-title">{{ skill }}</h3>
+          <div class="item" *ngFor="let skill of skills; index as i">
+            <h3 class="level-title">{{ skill.name }}</h3>
             <div class="progress level-bar">
-              <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+              <mat-progress-bar mode="determinate" [value]="skill.value"></mat-progress-bar>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-</div>
-<div>
-  <button mat-button (click)="submitEmail()">{{ 'bt-yes-next' | translate }}</button>
 </div>

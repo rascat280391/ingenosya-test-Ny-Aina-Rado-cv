@@ -12,6 +12,11 @@ export interface Formation {
   document: string
 }
 
+export interface Skill {
+  name: string;
+  value: number;
+}
+
 export interface Candidat {
   isCreated: boolean;
   name: string;
@@ -22,7 +27,7 @@ export interface Candidat {
   birthday: string;
   contact: string;
   about?: string;
-  skills: string[];
+  skills: Skill[];
   hobbies: string[];
   experiences: Experience[];
   formations: Formation[];

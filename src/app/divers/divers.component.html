@@ -21,9 +21,9 @@
     <mat-step [stepControl]="skillGroup" [label]="'dv-skill' | translate">
       <form [formGroup]="skillGroup">
         <mat-card>
-          <mat-label>{{ 'dv-form-require-skill' | translate }}</mat-label>
+<!--          <mat-label>{{ 'dv-form-require-skill' | translate }}</mat-label>-->
           <ul class="liste-ul">
-            <li *ngFor="let skill of skills; index as i" (click)="removeSkill(i)">{{ skill }}
+            <li *ngFor="let skill of skills; index as i" (click)="removeSkill(i)">{{ skill.name }} ({{ skill.value ? skill.value : 0 }}%)
               <mat-icon style="cursor: pointer">{{ 'cancel' | translate }}</mat-icon>
             </li>
           </ul>
@@ -32,6 +32,14 @@
               <mat-label>{{ 'dv-form-skills' | translate }}</mat-label>
               <input matInput formControlName="skill" [placeholder]="'dv-form-skills' | translate"/>
             </mat-form-field>
+            <mat-slider
+              formControlName="skillStep"
+              thumbLabel
+              step="5"
+              min="0"
+              max="100"
+              aria-label="units">
+            </mat-slider>
             <button class="add-btn" mat-mini-fab color="primary" aria-label="plus" (click)="addSkill()">
               <mat-icon>{{ 'bt-add' | translate }}</mat-icon>
             </button>
@@ -165,7 +173,7 @@
             </div>
             <div fxFlex.gt-sm="33.3333" fxFlex="33.3333">
               <mat-form-field appearance="outline">
-                <mat-label>{{ 'dv-form-nom-poste' | translate }}</mat-label>
+                <mat-label>{{ 'dv-form-document' | translate }}</mat-label>
                 <input matInput formControlName="document" [placeholder]="'dv-form-document' | translate"/>
               </mat-form-field>
             </div>
@@ -196,7 +204,12 @@
 
     <mat-step>
       <ng-template matStepLabel>{{ 'dv-resume' | translate }}</ng-template>
-      <p>{{ 'dv-resume-confirme' | translate }}</p>
+      <app-visualisation
+        [skills]="skills"
+        [hobbies]="hobbies"
+        [experiences]="exps"
+        [formations]="forms"
+      ></app-visualisation>
       <div>
         <button mat-button matStepperPrevious>{{ 'bt-prev' | translate }}</button>
         <button mat-button (click)="submitRecap()">{{ 'bt-submit' | translate }}</button>

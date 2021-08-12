@@ -1,9 +1,15 @@
 .add-field {
   .mat-form-field-appearance-outline {
     margin-bottom: 0;
+    width: 50%;
+    margin-right: 15px;
     .mat-form-field-wrapper {
       margin-bottom: -1.25em;
     }
+  }
+  .mat-slider-horizontal {
+    width: 30%;
+    margin-right: 15px;
   }
   .mat-button {}
 }

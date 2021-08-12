@@ -11,6 +11,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -21,6 +23,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
+    MatSliderModule,
     MatToolbarModule,
     MatStepperModule,
     MatFormFieldModule,
@@ -32,6 +36,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatListModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
+    MatSliderModule,
     MatToolbarModule,
     MatStepperModule,
     MatFormFieldModule,
