@@ -1,0 +1,15 @@
+.outlined {
+	cursor: pointer
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-flat-button.mat-primary {
+  background: #1e88e5 !important;
+  border-radius: 40px !important;
+  min-width: 290px !important;
+  color: #fff !important;
+  transition: all 0.5s ease !important;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%) !important;
+}

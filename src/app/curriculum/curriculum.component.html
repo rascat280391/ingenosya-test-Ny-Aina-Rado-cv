@@ -1,0 +1,59 @@
+<div class="main-container">
+  <div layout="row" layout-wrap>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <h1>{{ 'hp-title-info' | translate }}</h1>
+      <mat-card>
+        <div fxLayout="row wrap" fxLayoutGap="10px 5px grid" class="coloredContainerX box">
+          <div fxFlex.gt-sm="50" fxFlex="50">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'hp-form-name' | translate }}</mat-label>
+              <input matInput formControlName="name" [placeholder]="'hp-placeholder-name' | translate" required/>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="50" fxFlex="50">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'hp-form-address' | translate }}</mat-label>
+              <input matInput formControlName="address" [placeholder]="'hp-placeholder-address' | translate" required/>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="33.3333" fxFlex="33.3333">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'hp-form-province' | translate }}</mat-label>
+              <input matInput formControlName="province" [placeholder]="'hp-placeholder-province' | translate" required/>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="33.3333" fxFlex="33.3333">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'hp-form-city' | translate }}</mat-label>
+              <input matInput formControlName="city" [placeholder]="'hp-placeholder-city' | translate" required/>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="33.3333" fxFlex="33.3333">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'hp-form-email' | translate }}</mat-label>
+              <input matInput formControlName="email" [placeholder]="'hp-placeholder-email' | translate" required/>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="50" fxFlex="50">
+            <mat-form-field color="accent" appearance="outline">
+              <mat-label>{{ 'hp-form-brithday' | translate }}</mat-label>
+              <input matInput [max]="maxDate" [matDatepicker]="picker2" formControlName="birthday"/>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2 color="primary"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="50" fxFlex="50">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'hp-form-contact' | translate }}</mat-label>
+              <input matInput formControlName="contact" [placeholder]="'hp-placeholder-contact' | translate" required/>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+
+      <div fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+        <button mat-raised-button color="primary" type="submit">{{ 'bt-next' | translate }}</button>
+      </div>
+    </form>
+  </div>
+</div>

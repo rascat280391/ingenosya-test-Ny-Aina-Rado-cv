@@ -1,0 +1,29 @@
+<div layout="row" layout-wrap>
+	<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+		<h1>{{ 'em-title' | translate }}</h1>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'em-form-email' | translate }}</mat-label>
+      <input matInput formControlName="email" [placeholder]="'em-placeholder-email' | translate" required />
+    </mat-form-field>
+    <br/>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'em-form-subject' | translate }}</mat-label>
+      <input matInput formControlName="subject" [placeholder]="'em-placeholder-subject' | translate" required />
+    </mat-form-field>
+     <br/>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'em-form-message' | translate }}</mat-label>
+      <input matInput formControlName="message" [placeholder]="'em-placeholder-message' | translate" required />
+    </mat-form-field>
+ 		<br/>
+
+    <mat-label>{{ 'em-form-attachment' | translate }}</mat-label>
+    <input type="file" formControlName="attachments" [placeholder]="'em-placeholder-message' | translate" required />
+ 		<br/>
+
+    <div>
+      <button mat-button type="submit">{{ 'bt-send' | translate }}</button>
+    </div>
+	</form>
+</div>

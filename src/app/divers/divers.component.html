@@ -1,0 +1,207 @@
+<div class="main-container">
+  <h1>Vos information</h1>
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="aboutGroup">
+      <form [formGroup]="aboutGroup">
+        <mat-card>
+          <ng-template matStepLabel>{{ 'dv-about' | translate }}</ng-template>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'dv-form-about' | translate }}</mat-label>
+            <textarea matInput [placeholder]="'dv-form-about' | translate" formControlName="about"
+                      maxlength="100"></textarea>
+          </mat-form-field>
+        </mat-card>
+        <div fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+          <button mat-raised-button color="primary" matStepperNext>{{ 'bt-next' | translate }}</button>
+        </div>
+      </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="skillGroup" [label]="'dv-skill' | translate">
+      <form [formGroup]="skillGroup">
+        <mat-card>
+          <mat-label>{{ 'dv-form-require-skill' | translate }}</mat-label>
+          <ul class="liste-ul">
+            <li *ngFor="let skill of skills; index as i" (click)="removeSkill(i)">{{ skill }}
+              <mat-icon style="cursor: pointer">{{ 'cancel' | translate }}</mat-icon>
+            </li>
+          </ul>
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="add-field">
+            <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
+              <mat-label>{{ 'dv-form-skills' | translate }}</mat-label>
+              <input matInput formControlName="skill" [placeholder]="'dv-form-skills' | translate"/>
+            </mat-form-field>
+            <button class="add-btn" mat-mini-fab color="primary" aria-label="plus" (click)="addSkill()">
+              <mat-icon>{{ 'bt-add' | translate }}</mat-icon>
+            </button>
+          </div>
+
+        </mat-card>
+        <div fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+          <button mat-raised-button color="primary" matStepperPrevious>{{ 'bt-prev' | translate }}</button>
+          <button mat-raised-button color="primary" matStepperNext
+                  [disabled]="!skills.length">{{ 'bt-next' | translate }}</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="hobbyGroup" [label]="'dv-hobby' | translate">
+      <form [formGroup]="hobbyGroup">
+        <mat-card>
+          <ul class="liste-ul">
+            <li *ngFor="let hobby of hobbies; index as i" (click)="removeHobby(i)">{{ hobby }}
+              <mat-icon>{{ 'cancel' | translate }}</mat-icon>
+            </li>
+          </ul>
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="add-field">
+            <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
+              <mat-label>{{ 'dv-form-hobby' | translate }}</mat-label>
+              <input matInput formControlName="hobby" [placeholder]="'dv-form-hobby' | translate"/>
+            </mat-form-field>
+            <button class="add-btn" mat-mini-fab color="primary" aria-label="plus" (click)="addHobby()">
+              <mat-icon>{{ 'bt-add' | translate }}</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+        <div fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+          <button mat-raised-button color="primary" matStepperPrevious>{{ 'bt-prev' | translate }}</button>
+          <button mat-raised-button color="primary" matStepperNext
+                  [disabled]="!hobbies.length">{{ 'bt-next' | translate }}</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="expGroup" [label]="'dv-exp' | translate">
+      <form [formGroup]="expGroup">
+
+        <mat-card class="exp-container" *ngFor="let exp of exps; index as i" style="margin-bottom: 10px">
+          <div>
+            <h4>{{ exp.nomPoste }} - {{ dateFormat(exp.dateDebut) }} - {{ dateFormat(exp.dateFin) }}</h4>
+            <p>{{ exp.descPoste }}</p>
+          </div>
+
+          <button class="btn-del" mat-button (click)="removeExp(i)">
+            <mat-icon>{{ 'delete' | translate }}</mat-icon>
+          </button>
+        </mat-card>
+
+        <mat-card>
+          <div fxLayout="row wrap" fxLayoutGap="10px 5px grid" class="coloredContainerX box">
+            <div fxFlex.gt-sm="50" fxFlex="50">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'dv-form-nom-entreprise' | translate }}</mat-label>
+                <input matInput formControlName="nomEntreprise" [placeholder]="'dv-form-nom-entreprise' | translate"/>
+              </mat-form-field>
+            </div>
+            <div fxFlex.gt-sm="50" fxFlex="50">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'dv-form-nom-poste' | translate }}</mat-label>
+                <input matInput formControlName="nomPoste" [placeholder]="'dv-form-nom-post' | translate"/>
+              </mat-form-field>
+            </div>
+            <div fxFlex.gt-sm="50" fxFlex="50">
+              <mat-form-field color="accent" appearance="outline">
+                <mat-label>{{ 'dv-form-date-debut' | translate }}</mat-label>
+                <input matInput [matDatepicker]="dateDebut" formControlName="dateDebut"/>
+                <mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
+                <mat-datepicker #dateDebut color="primary"></mat-datepicker>
+              </mat-form-field>
+              <mat-error
+                *ngIf="expGroup.controls.dateDebut.hasError('matStartDateInvalid')">{{ 'dv-form-error-date-debut' | translate }}</mat-error>
+            </div>
+            <div fxFlex.gt-sm="50" fxFlex="50">
+              <mat-form-field color="accent" appearance="outline">
+                <mat-label>{{ 'dv-form-date-fin' | translate }}</mat-label>
+                <input matInput [matDatepicker]="dateFin" formControlName="dateFin"/>
+                <mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
+                <mat-datepicker #dateFin color="primary"></mat-datepicker>
+              </mat-form-field>
+              <mat-error
+                *ngIf="expGroup.controls.dateFin.hasError('matEndDateInvalid')">{{ 'dv-form-error-date-fin' | translate }}</mat-error>
+            </div>
+            <div fxFlex.gt-sm="100" fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'dv-form-desc-poste' | translate }}</mat-label>
+                <textarea matInput [placeholder]="'dv-form-about' | translate" formControlName="descPoste"></textarea>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+              <button class="btn-save" mat-stroked-button (click)="addExp()">
+                <mat-icon>{{ 'bt-add' | translate }}</mat-icon>
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </mat-card>
+
+        <div fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+          <button mat-raised-button color="primary" matStepperPrevious>{{ 'bt-prev' | translate }}</button>
+          <button mat-raised-button color="primary" matStepperNext
+                  [disabled]="!exps.length">{{ 'bt-next' | translate }}</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="formGroup" [label]="'dv-formation' | translate">
+      <form [formGroup]="formGroup">
+        <mat-card class="exp-container" *ngFor="let form of forms; index as i" style="margin-bottom: 10px">
+          <div>
+            <h4>{{ form.nomInstitut }}</h4>
+            <p>{{ form.document }} - {{ dateFormat(form.date) }}</p>
+          </div>
+          <button class="btn-del" (click)="removeExp(i)">
+            <mat-icon>{{ 'delete' | translate }}</mat-icon>
+          </button>
+        </mat-card>
+
+        <mat-card>
+          <div fxLayout="row wrap" fxLayoutGap="10px 5px grid" class="coloredContainerX box">
+            <div fxFlex.gt-sm="33.3333" fxFlex="33.3333">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'dv-form-nom-institut' | translate }}</mat-label>
+                <input matInput formControlName="nomInstitut" [placeholder]="'dv-form-nom-institut' | translate"/>
+              </mat-form-field>
+            </div>
+            <div fxFlex.gt-sm="33.3333" fxFlex="33.3333">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'dv-form-nom-poste' | translate }}</mat-label>
+                <input matInput formControlName="document" [placeholder]="'dv-form-document' | translate"/>
+              </mat-form-field>
+            </div>
+            <div fxFlex.gt-sm="33.3333" fxFlex="33.3333">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'dv-form-date' | translate }}</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date"/>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+              <button class="btn-save" mat-stroked-button (click)="addForm()">
+                <mat-icon>{{ 'bt-add' | translate }}</mat-icon>
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </mat-card>
+
+        <div fxLayout="row wrap" fxLayoutAlign="center" class="btn-container">
+          <button mat-raised-button color="primary" matStepperPrevious>{{ 'bt-prev' | translate }}</button>
+          <button mat-raised-button color="primary" matStepperNext
+                  [disabled]="!forms.length">{{ 'bt-next' | translate }}</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>{{ 'dv-resume' | translate }}</ng-template>
+      <p>{{ 'dv-resume-confirme' | translate }}</p>
+      <div>
+        <button mat-button matStepperPrevious>{{ 'bt-prev' | translate }}</button>
+        <button mat-button (click)="submitRecap()">{{ 'bt-submit' | translate }}</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+
